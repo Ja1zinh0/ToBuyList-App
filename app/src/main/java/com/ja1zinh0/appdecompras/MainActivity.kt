@@ -8,6 +8,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ja1zinh0.appdecompras.ui.theme.AppDeComprasTheme
 import com.ja1zinh0.appdecompras.ui.view.login.LoginScreen
+import com.ja1zinh0.appdecompras.ui.view.main.MainScreen
+import com.ja1zinh0.appdecompras.ui.view.recoverpsswrd.RecoverPsswrdScreen
 import com.ja1zinh0.appdecompras.ui.view.start.StartScreen
 import com.ja1zinh0.appdecompras.ui.view.signup.SignupScreen
 
@@ -19,11 +21,13 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(
                     navController = navController,
-                    startDestination = "startScreen"
+                    startDestination = "mainScreen"
                 ) {
                     composable("startScreen") { StartScreen(navController) }
                     composable("loginScreen") { LoginScreen(navController) }
                     composable("signupScreen") { SignupScreen(navController)}
+                    composable("recoverpassword") { RecoverPsswrdScreen(navController)}
+                    composable("mainScreen") {MainScreen(navController)}
                 }
             }
         }

@@ -56,7 +56,9 @@ fun LoginScreen(
                     hidePasswordInitially = true
                 )
                 Row(
-                    modifier = Modifier.fillMaxWidth(0.75F).padding(top = 5.dp),
+                    modifier = Modifier
+                        .fillMaxWidth(0.75F)
+                        .padding(top = 5.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.End
                 ) {
@@ -64,7 +66,9 @@ fun LoginScreen(
                         style = TextStyle(
                             fontWeight = FontWeight.Bold
                         ),
-                        modifier = Modifier.clickable {}
+                        modifier = Modifier.clickable {
+                            navController.navigate("recoverpassword")
+                        }
                     )
                 }
                 Box(modifier = Modifier.padding(top = 60.dp))

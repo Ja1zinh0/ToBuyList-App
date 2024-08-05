@@ -30,7 +30,7 @@ import com.ja1zinh0.appdecompras.ui.components.GoogleRoundButton
 @Composable
 fun SignupScreen(
     navController: NavController
-){
+) {
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
         content = { padding ->
