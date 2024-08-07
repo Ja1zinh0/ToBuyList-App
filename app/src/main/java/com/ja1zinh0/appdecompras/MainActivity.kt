@@ -12,7 +12,9 @@ import com.ja1zinh0.appdecompras.ui.view.main.MainScreen
 import com.ja1zinh0.appdecompras.ui.view.recoverpsswrd.RecoverPsswrdScreen
 import com.ja1zinh0.appdecompras.ui.view.start.StartScreen
 import com.ja1zinh0.appdecompras.ui.view.signup.SignupScreen
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -77,7 +77,7 @@ fun LoginScreen(
                     borderColor = MaterialTheme.colorScheme.onTertiaryContainer,
                     text = "Login",
                     textColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                    onClick = {}
+                    onClick = {navController.navigate("mainScreen")}
                 )
                 Row(Modifier.padding(top = 4.dp)) {
                     Text(
