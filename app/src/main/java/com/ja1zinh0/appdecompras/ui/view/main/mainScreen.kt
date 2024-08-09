@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.ja1zinh0.appdecompras.model.itemCard.ItemCard
+import com.ja1zinh0.appdecompras.ui.components.GenericBottomBar
 import com.ja1zinh0.appdecompras.ui.components.ItemCardBox
 import com.ja1zinh0.appdecompras.ui.components.genericTopBar
 import com.ja1zinh0.appdecompras.viewmodel.CardListViewModel
@@ -32,16 +33,9 @@ fun MainScreen(
     val cardItems by viewModel.cardItems.collectAsState()
     Scaffold(
         topBar = genericTopBar("My lists"),
+        bottomBar = { GenericBottomBar(viewModel) },
         containerColor = MaterialTheme.colorScheme.background,
-        floatingActionButton = {
-            FloatingActionButton(onClick = {
-                // Aqui você pode criar um novo ItemCard
-                val newCard = ItemCard(title = "teste", cardID = 2, totalPrice = "123")
-                viewModel.addItem(newCard)  // Adiciona o novo item à lista
-            }) {
-                Text("+")  // Ícone ou texto para o botão
-            }
-        },
+
         content = { padding ->
             Column(
                 modifier = Modifier

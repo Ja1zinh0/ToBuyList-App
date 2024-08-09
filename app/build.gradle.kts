@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "com.ja1zinh0.appdecompras"
-        minSdk = 31
+        minSdk = 30
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -52,7 +52,6 @@ android {
     }
 }
 dependencies {
-    val compose_version = "1.6.8"
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -71,22 +70,25 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.kotlinx.serialization.json)
-    implementation ("androidx.compose.material:material-icons-extended:$compose_version")
+    implementation (libs.androidx.material.icons.extended)
 
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
-    implementation("androidx.hilt:hilt-work:1.0.0")
-    kapt("androidx.hilt:hilt-compiler:1.0.0")
-    implementation("androidx.work:work-runtime-ktx:2.8.1")
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    implementation("com.google.dagger:hilt-android:2.52")
+    kapt("com.google.dagger:hilt-android-compiler:2.52")
+    implementation("androidx.hilt:hilt-work:1.2.0")
+    kapt("androidx.hilt:hilt-compiler:1.2.0")
+    implementation("androidx.work:work-runtime-ktx:2.9.1")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
 
     testImplementation (libs.junit)
-    androidTestImplementation ("androidx.test.ext:junit:1.2.1")
-    androidTestImplementation ("androidx.test.espresso:espresso-core:3.6.1")
-    androidTestImplementation (platform("androidx.compose:compose-bom:2024.06.00"))
+    androidTestImplementation (libs.androidx.junit)
+    androidTestImplementation (libs.androidx.espresso.core)
+    androidTestImplementation (platform(libs.androidx.compose.bom))
+    //noinspection UseTomlInstead
     androidTestImplementation ("androidx.compose.ui:ui-test-junit4")
+    //noinspection UseTomlInstead
     debugImplementation ("androidx.compose.ui:ui-tooling")
+    //noinspection UseTomlInstead
     debugImplementation ("androidx.compose.ui:ui-test-manifest")
 
 }
