@@ -84,15 +84,9 @@ fun GenericBottomBar(
                             showDialog = false
                         },
                         dialogTitle = "Create new list?",
-                        dialogText = "teste",
                     )
                 }
             }
         }
     }
 }
-
-/*
-val newCard = ItemCard(title = "List01", cardID = 2, totalPrice = "123")
-viewModel.addItem(newCard)
-*/
