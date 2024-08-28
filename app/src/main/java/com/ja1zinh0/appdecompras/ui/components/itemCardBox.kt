@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -34,18 +35,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ja1zinh0.appdecompras.model.itemCard.ItemCard
+import com.ja1zinh0.appdecompras.data.room.model.itemCard.Card
+import com.ja1zinh0.appdecompras.data.room.model.itemCard.ItemCard
 
 @Composable
 fun ItemCardBox(
     itemCard: ItemCard,
     onDelete: (ItemCard) -> Unit,
-    onUpdateTitle: (ItemCard, String) -> Unit
 ) {
     val currentTitle = remember { mutableStateOf(itemCard.title) }
     val totalAmount = remember { mutableStateOf(TextFieldValue("0,00")) }
-    var showDialog by remember { mutableStateOf(false) }
-
+    var showUpdateCardDialog by remember { mutableStateOf(false) }
+    var showDeleteCardDialog by remember { mutableStateOf(false) }
     Card(
         modifier = Modifier
             .fillMaxWidth(0.90F)
@@ -69,26 +70,49 @@ fun ItemCardBox(
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
                             Text(text = currentTitle.value, style = TextStyle(fontSize = 24.sp))
-                            IconButton(modifier = Modifier.offset(y = (-10).dp),
-                                onClick = {
-                                    showDialog = true
+                            Column() {
+                                IconButton(modifier = Modifier.offset(y = (-10).dp),
+                                    onClick = {
+                                        showUpdateCardDialog = true
+                                    }
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Filled.Edit,
+                                        contentDescription = "Edit Button",
+                                        tint = Color.White
+                                    )
                                 }
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Filled.Edit,
-                                    contentDescription = "Edit Button",
-                                    tint = Color.White
-                                )
+                                IconButton(modifier = Modifier.offset(y = (-25).dp),
+                                    onClick = {
+                                        showDeleteCardDialog = true
+                                    }
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Filled.Delete,
+                                        contentDescription = "Delete Button",
+                                        tint = Color.White
+                                    )
+                                }
                             }
-                            if (showDialog) {
+                            if (showUpdateCardDialog) {
                                 UpdateCardAlertDialog(
-                                    onDismissRequest = {showDialog = false},
+                                    onDismissRequest = { showUpdateCardDialog = false },
                                     onConfirmation = { newTitle ->
                                         currentTitle.value = newTitle
-                                        showDialog = false
+                                        showUpdateCardDialog = false
                                     },
                                     dialogTitle = "Update title"
                                 )
+                            }
+                            if (showDeleteCardDialog) {
+                                DeleteCardAlertDialog(
+                                    onDismissRequest = { showDeleteCardDialog = false },
+                                    onConfirmation = {
+                                        onDelete(itemCard)
+                                        showDeleteCardDialog = false
+                                    }
+                                )
+
                             }
                         }
                         Box(

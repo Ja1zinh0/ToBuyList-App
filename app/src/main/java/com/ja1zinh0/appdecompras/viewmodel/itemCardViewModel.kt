@@ -2,38 +2,28 @@ package com.ja1zinh0.appdecompras.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ja1zinh0.appdecompras.model.itemCard.ItemCard
-import com.ja1zinh0.appdecompras.repository.CardRepository
+import com.ja1zinh0.appdecompras.data.room.model.CardListDatabase
+import com.ja1zinh0.appdecompras.data.room.model.itemCard.ItemCard
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CardListViewModel@Inject constructor(
-    private val repository: CardRepository
+class CardListViewModel @Inject constructor(
+    private val database: CardListDatabase
 ) : ViewModel() {
+    val cardItems: Flow<List<ItemCard>> = database.listDao().getCards()
 
-    val cardItems: StateFlow<List<ItemCard>> = repository.getCardItems()
-        .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
-
-    fun addItem(item: ItemCard) {
+    fun addItem(card: ItemCard) {
         viewModelScope.launch {
-            repository.addItem(item)
+            database.listDao().insertCardList(card)
         }
     }
 
-    fun removeItem(item: ItemCard) {
+    fun removeItem(card: ItemCard) {
         viewModelScope.launch {
-            repository.removeItem(item)
-        }
-    }
-
-    fun updateItem(item: ItemCard) {
-        viewModelScope.launch {
-            repository.updateItem(item)
+            database.cardDao().delete(card)
         }
     }
 }

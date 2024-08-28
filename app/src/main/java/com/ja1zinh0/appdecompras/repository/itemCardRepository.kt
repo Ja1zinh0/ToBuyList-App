@@ -1,6 +1,6 @@
 package com.ja1zinh0.appdecompras.repository
 
-import com.ja1zinh0.appdecompras.model.itemCard.ItemCard
+import com.ja1zinh0.appdecompras.data.room.model.itemCard.ItemCard
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject

@@ -1,5 +1,6 @@
 package com.ja1zinh0.appdecompras.ui.components
 
+import com.ja1zinh0.appdecompras.viewmodel.CardListViewModel
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,9 +11,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.AlternateEmail
 import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -26,8 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.ja1zinh0.appdecompras.model.itemCard.ItemCard
-import com.ja1zinh0.appdecompras.viewmodel.CardListViewModel
+import com.ja1zinh0.appdecompras.data.room.model.itemCard.ItemCard
 
 @Composable
 fun GenericBottomBar(

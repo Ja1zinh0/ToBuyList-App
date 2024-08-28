@@ -62,6 +62,9 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.constraintlayout.compose)
+    implementation(libs.androidx.room.common)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.room.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -78,7 +81,7 @@ dependencies {
     kapt("androidx.hilt:hilt-compiler:1.2.0")
     implementation("androidx.work:work-runtime-ktx:2.9.1")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
-
+    kapt("androidx.room:room-compiler:2.5.0")
 
     testImplementation (libs.junit)
     androidTestImplementation (libs.androidx.junit)

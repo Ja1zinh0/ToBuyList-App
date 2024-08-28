@@ -221,3 +221,85 @@ fun UpdateCardAlertDialog(
         }
     )
 }
+
+@Composable
+fun DeleteCardAlertDialog(
+    onDismissRequest: () -> Unit,
+    onConfirmation: () -> Unit,
+) {
+    AlertDialog(
+        containerColor = MaterialTheme.colorScheme.secondary,
+        title = {
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = "Delete Card?",
+                style = TextStyle(fontSize = 26.sp),
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onSecondary
+            )
+        },
+        text = {
+            Text(text = "Are you sure you want to delete this card?", style = TextStyle(
+                fontSize = 18.sp,
+                color = MaterialTheme.colorScheme.onSecondary,
+                textAlign = TextAlign.Center
+            )
+            )
+        },
+        onDismissRequest = {
+            onDismissRequest()
+        },
+        confirmButton = {
+            TextButton(
+                onClick = {
+                    onConfirmation()
+                }
+            ) {
+                Box(
+                    modifier = Modifier
+                        .clip(
+                            RoundedCornerShape(20.dp)
+                        )
+                        .width(80.dp)
+                        .height(40.dp)
+                        .background(MaterialTheme.colorScheme.surface),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        "Yes",
+                        style = TextStyle(
+                            color = MaterialTheme.colorScheme.onSurface
+                        ),
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                }
+            }
+        },
+        dismissButton = {
+            TextButton(
+                onClick = {
+                    onDismissRequest()
+                }
+            ) {
+                Box(
+                    modifier = Modifier
+                        .clip(
+                            RoundedCornerShape(20.dp)
+                        )
+                        .width(80.dp)
+                        .height(40.dp)
+                        .background(MaterialTheme.colorScheme.surface),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        "No",
+                        style = TextStyle(color = MaterialTheme.colorScheme.onSurface),
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                }
+            }
+        }
+    )
+}
