@@ -225,7 +225,8 @@ fun UpdateCardAlertDialog(
 @Composable
 fun DeleteCardAlertDialog(
     onDismissRequest: () -> Unit,
-    onConfirmation: () -> Unit,
+    onConfirmation: (Int) -> Unit,
+    cardID: Int
 ) {
     AlertDialog(
         containerColor = MaterialTheme.colorScheme.secondary,
@@ -252,7 +253,7 @@ fun DeleteCardAlertDialog(
         confirmButton = {
             TextButton(
                 onClick = {
-                    onConfirmation()
+                    onConfirmation(cardID)
                 }
             ) {
                 Box(

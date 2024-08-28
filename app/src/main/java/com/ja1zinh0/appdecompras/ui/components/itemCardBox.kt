@@ -42,6 +42,7 @@ import com.ja1zinh0.appdecompras.data.room.model.itemCard.ItemCard
 fun ItemCardBox(
     itemCard: ItemCard,
     onDelete: (ItemCard) -> Unit,
+    card: ItemCard
 ) {
     val currentTitle = remember { mutableStateOf(itemCard.title) }
     val totalAmount = remember { mutableStateOf(TextFieldValue("0,00")) }
@@ -110,7 +111,8 @@ fun ItemCardBox(
                                     onConfirmation = {
                                         onDelete(itemCard)
                                         showDeleteCardDialog = false
-                                    }
+                                    },
+                                    cardID = card.cardID
                                 )
 
                             }

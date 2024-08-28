@@ -16,6 +16,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -29,7 +30,7 @@ import com.ja1zinh0.appdecompras.data.room.model.itemCard.ItemCard
 
 @Composable
 fun GenericBottomBar(
-    viewModel: CardListViewModel = hiltViewModel()
+    viewModel: CardListViewModel = hiltViewModel(),
 ) {
     var showDialog by remember { mutableStateOf(false) }
     Box(Modifier.fillMaxWidth()) {
@@ -77,7 +78,11 @@ fun GenericBottomBar(
                     CreateCardAlertDialog(
                         onDismissRequest = { showDialog = false },
                         onConfirmation = {
-                            val newCard = ItemCard(title = it, cardID = 2, totalPrice = "123")
+                            val newCard = ItemCard(
+                                title = it,
+                                cardID = viewModel.generateUniqueId(),
+                                totalPrice = "123"
+                            )
                             viewModel.addItem(newCard)
                             showDialog = false
                         },

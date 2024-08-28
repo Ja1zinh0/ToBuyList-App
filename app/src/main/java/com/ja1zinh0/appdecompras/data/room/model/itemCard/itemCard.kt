@@ -7,9 +7,8 @@ import java.util.Date
 
 @Entity(tableName = "card_list")
 data class ItemCard(
-    @ColumnInfo(name = "card_id")
-    @PrimaryKey
-    val cardID: Int,
+    @PrimaryKey(autoGenerate = true)
+    val cardID: Int = 0,
     val title: String,
     val totalPrice: String,
 )

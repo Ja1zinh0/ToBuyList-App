@@ -1,5 +1,7 @@
 package com.ja1zinh0.appdecompras.data.room.model
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Embedded
@@ -10,11 +12,12 @@ import androidx.room.Update
 import com.ja1zinh0.appdecompras.data.room.model.itemCard.Card
 import com.ja1zinh0.appdecompras.data.room.model.itemCard.ItemCard
 import com.ja1zinh0.appdecompras.data.room.model.itemCard.Store
+import com.ja1zinh0.appdecompras.viewmodel.CardListViewModel
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CardDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert()
     suspend fun insert(card: ItemCard)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
@@ -49,15 +52,10 @@ interface ListDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCardList(cardList: ItemCard)
 
-    @Query("""
-        SELECT 
-            * 
-        FROM card_list
-    """)
+    @Query("SELECT * FROM card_list")
     fun getCards(): Flow<List<ItemCard>>
 
 }
-
 
 data class CardsWithStoreAndList(
     @Embedded(prefix = "card_") val card: Card,
