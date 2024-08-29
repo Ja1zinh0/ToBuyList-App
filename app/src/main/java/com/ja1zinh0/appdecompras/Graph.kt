@@ -2,6 +2,7 @@ package com.ja1zinh0.appdecompras
 
 import android.content.Context
 import com.ja1zinh0.appdecompras.data.room.model.CardListDatabase
+import com.ja1zinh0.appdecompras.data.room.model.ListDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,5 +27,5 @@ object DatabaseModule {
     fun provideCardDao(database: CardListDatabase) = database.cardDao()
 
     @Provides
-    fun provideStoreDao(database: CardListDatabase) = database.storeDao()
+    fun provideItemListDao(database: CardListDatabase) = database.itemCardDao()
 }

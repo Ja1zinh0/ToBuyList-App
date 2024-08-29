@@ -3,6 +3,7 @@ package com.ja1zinh0.appdecompras.data.room.model.itemCard
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.ja1zinh0.appdecompras.data.room.model.ItemList.ItemList
 import java.util.Date
 
 @Entity(tableName = "card_list")
@@ -25,13 +26,4 @@ data class Card(
     @ColumnInfo(name = "storeIDFk")
     val storeIDFk: Int,
     val date: Date,
-)
-
-@Entity(tableName = "stores")
-data class Store(
-    @ColumnInfo(name = "store_id")
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
-    @ColumnInfo(name = "listIdFk")
-    val listIdFk: Int,
 )

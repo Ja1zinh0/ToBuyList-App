@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -17,11 +18,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.ja1zinh0.appdecompras.data.room.model.ItemList.ItemList
 import com.ja1zinh0.appdecompras.data.room.model.itemCard.ItemCard
 import com.ja1zinh0.appdecompras.ui.components.GenericBottomBar
 import com.ja1zinh0.appdecompras.ui.components.ItemCardBox
 import com.ja1zinh0.appdecompras.ui.components.genericTopBar
 
+@ExperimentalMaterial3Api
 @Composable
 fun MainScreen(
     navController: NavController,
@@ -47,7 +50,8 @@ fun MainScreen(
                         ItemCardBox(
                             itemCard = card,
                             onDelete = {viewModel.removeItem(card.cardID)},
-                            card = card
+                            onUpdate = {itemCard, newTitle -> viewModel.updateCardTitle(itemCard, newTitle)},
+                            card = card,
                         )
                     }
                 }

@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ja1zinh0.appdecompras.data.room.model.CardListDatabase
+import com.ja1zinh0.appdecompras.data.room.model.ItemList.ItemList
 import com.ja1zinh0.appdecompras.data.room.model.itemCard.ItemCard
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -32,8 +33,6 @@ class CardListViewModel @Inject constructor(
         viewModelScope.launch {
             database.listDao().insertCardList(card)
             Log.d("CardListViewModel", "ItemCard added successfully: $card")
-
-            // Debug: Verificar o estado atual da tabela após a inserção
             database.listDao().getCards().collect { items ->
                 Log.d("CardListViewModel", "Current items in card_list: $items")
             }
@@ -46,6 +45,13 @@ class CardListViewModel @Inject constructor(
             cardToDelete?.let {
                 database.cardDao().delete(it)
             }
+        }
+    }
+
+    fun updateCardTitle(itemCard: ItemCard, newTitle: String) {
+        viewModelScope.launch {
+            val updatedCard = itemCard.copy(title = newTitle)
+            database.cardDao().update(updatedCard)
         }
     }
 

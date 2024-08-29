@@ -1,7 +1,5 @@
 package com.ja1zinh0.appdecompras.data.room.model
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Embedded
@@ -9,10 +7,9 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import com.ja1zinh0.appdecompras.data.room.model.ItemList.ItemList
 import com.ja1zinh0.appdecompras.data.room.model.itemCard.Card
 import com.ja1zinh0.appdecompras.data.room.model.itemCard.ItemCard
-import com.ja1zinh0.appdecompras.data.room.model.itemCard.Store
-import com.ja1zinh0.appdecompras.viewmodel.CardListViewModel
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -32,22 +29,6 @@ interface CardDao {
 }
 
 @Dao
-interface StoreDao{
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(store: Store)
-
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun update(store: Store)
-
-    @Delete
-    suspend fun delete(store: Store)
-
-    @Query("SELECT * FROM stores")
-    fun getAllStores(): Flow<List<Store>>
-
-}
-
-@Dao
 interface ListDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCardList(cardList: ItemCard)
@@ -57,8 +38,20 @@ interface ListDao {
 
 }
 
+@Dao
+interface ItemCardDao{
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertItemCard(item: ItemList)
+
+    @Delete
+    suspend fun deleteItem(item: ItemList)
+
+    @Query("SELECT * FROM itemCard_list WHERE cardID = :cardId")
+    fun getItemsForCard(cardId: Int):Flow<List<ItemList>>
+}
+
 data class CardsWithStoreAndList(
     @Embedded(prefix = "card_") val card: Card,
     @Embedded(prefix = "cardList_") val cardList: ItemCard,
-    @Embedded(prefix = "store_") val store: Store
+    @Embedded(prefix = "itemCard_") val itemCardList: ItemList,
 )
